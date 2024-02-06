@@ -1,0 +1,6 @@
+@DungeonAndDragonsWebsite_HostAddress = http://localhost:5224
+
+GET {{DungeonAndDragonsWebsite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
