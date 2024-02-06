@@ -23,11 +23,18 @@ namespace DungeonAndDragonsWebsite.Controllers
          }*/
 
         [HttpPost]
-        public void Post([FromBody] User user)
+        public void PostRegister([FromBody] User user)
         {
-            var returnCode = _userRepository.PostUser(user);
+            var returnCode = _userRepository.PostRegister(user);
             Console.WriteLine(returnCode);
 
+        }
+
+        [HttpPost("{username}")]
+        public void PostLogin(string username, [FromBody] User user)
+        {
+            var returnCode = _userRepository.PostLogin(user);
+            Console.WriteLine(returnCode);
         }
     }
 }
