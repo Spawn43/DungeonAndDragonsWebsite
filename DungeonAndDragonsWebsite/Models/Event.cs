@@ -6,16 +6,15 @@ namespace DungeonAndDragonsWebsite.Models
     public class Event
     {
         [Key]
-        public string EventID { get; set; }
+        public string Id { get; set; }
 
-        public string EventName { get; set; }
+        public string Name { get; set; }
 
-        public string EventLocation {  get; set; }
+        public string Location {  get; set; }
 
-        public DateTime EventDate { get; set; }
-        
-        public string EventPlannerID { get; set; }
-        public User EventPlanner { get; set; }
+        public DateTime Date { get; set; }
+
+        public User Planner { get; set; }
 
         public ICollection<Table> Tables { get; set; }
     }

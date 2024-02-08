@@ -6,13 +6,10 @@ namespace DungeonAndDragonsWebsite.Models
     public class Table
     {
         [Key]
-        public string TableID { get; set; }
-        public string EventID { get; set; }
+        public string Id { get; set; }
         public Event Event { get; set; }
-        public int PlayersAllowed { get; set; }       
+        public int PlayersAllowed { get; set; }
         public ICollection<User> Players { get; set; }       
-       
-        public string DungeonMasterID { get; set; }
         public User DungeonMaster { get; set; }
         
     }

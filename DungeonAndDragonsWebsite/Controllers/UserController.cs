@@ -12,9 +12,11 @@ namespace DungeonAndDragonsWebsite.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly ILoginTokenRepository _loginTokenRepository;
+        public UserController(IUserRepository userRepository, ILoginTokenRepository loginTokenRepository)
         {
             _userRepository = userRepository;
+            _loginTokenRepository = loginTokenRepository;
         }
         /* [HttpGet("User/{}")]
          [public async Task<IActionResult> Get()
@@ -30,11 +32,6 @@ namespace DungeonAndDragonsWebsite.Controllers
 
         }
 
-        [HttpPost("{username}")]
-        public void PostLogin(string username, [FromBody] User user)
-        {
-            var returnCode = _userRepository.PostLogin(user);
-            Console.WriteLine(returnCode);
-        }
+       
     }
 }

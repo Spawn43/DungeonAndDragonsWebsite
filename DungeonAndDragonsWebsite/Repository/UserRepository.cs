@@ -1,5 +1,6 @@
 ﻿using DungeonAndDragonsWebsite.Data;
 using DungeonAndDragonsWebsite.Models;
+using DungeonAndDragonsWebsite.Models.Requests;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlTypes;
 using System.Security.Cryptography;
@@ -13,7 +14,7 @@ namespace DungeonAndDragonsWebsite.Repository
     public interface IUserRepository
     {
         KeyValuePair<int, string> PostRegister(User user);
-        KeyValuePair<int, string> PostLogin(User user);
+        KeyValuePair<int, User> PostLogin(Login login);
     }
     public class UserRepository : IUserRepository
     {
@@ -24,14 +25,18 @@ namespace DungeonAndDragonsWebsite.Repository
             _db = db;
         }
 
-        public KeyValuePair<int, string> PostLogin(User user)
+        public KeyValuePair<int, User> PostLogin(Login login)
         {
-            KeyValuePair<int, string> returnCode = new KeyValuePair<int, string>(200, "");
-            
-            if(!CheckPassword(user)) {
-                returnCode = new KeyValuePair<int, string>(409, "Invalid Login");
-            }
-           
+            User emptyUser = new User();
+            KeyValuePair<int, User> returnCode = new KeyValuePair<int, User>(409, emptyUser);
+            User databaseUser = GetUser(login.Username);
+            if (databaseUser != null)
+            {
+                if (CheckPassword(login.Password, databaseUser))
+                {
+                    returnCode = new KeyValuePair<int, User>(200, databaseUser);
+                }
+            }           
             return returnCode;
         }
 
@@ -53,28 +58,23 @@ namespace DungeonAndDragonsWebsite.Repository
             else
             {
                 user = EncryptPassword(user);
-                user.UserId = user.Username + DateTime.Now.ToString() + new Random().Next(1000, 9999).ToString();
+                user.Id = user.Username + DateTime.Now.ToString() + new Random().Next(1000, 9999).ToString();
                 PostAddToDb(user);
             }
                      
             return returnCode;
         }
 
-
-        private bool CheckPassword(User user)
+        private User GetUser(string  username)
         {
-            List<User> dbUserList = _db.Users
-                    .Where(u => u.Username.Equals(user.Username))
-                    .ToList();
-            if(dbUserList.Count > 0)
-            {
-                User dbUser = dbUserList.First();
-
-                string hashedPassword = HashPassword(user.PasswordHash, dbUser.PasswordSalt);
-                return hashedPassword == dbUser.PasswordHash;
-            }
-            else
-            { return false; }
+            return _db.Users.FirstOrDefault(u => u.Username == username);
+        }
+        private bool CheckPassword(string password, User userDatabase)
+        {
+     
+                string hashedPassword = HashPassword(password, userDatabase.PasswordSalt);
+                return hashedPassword == userDatabase.PasswordHash;
+            
           
         }
 

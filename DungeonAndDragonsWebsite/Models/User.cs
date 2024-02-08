@@ -5,14 +5,14 @@ namespace DungeonAndDragonsWebsite.Models
     public class User
     {
         [Key]
-        public required string UserId { get; set; }
-        public required string Username { get; set; }
-        public required string Email { get; set; }
+        public  string Id { get; set; }
+        public  string Username { get; set; }
+        public  string Email { get; set; }
         public  string? PasswordSalt { get; set; }
         public  string? PasswordHash { get; set; }
-        public required string FirstName { get; set; }
-        public required string Surname { get; set; }
-        public required DateTime DateOfBirth { get; set; }
+        public  string FirstName { get; set; }
+        public  string Surname { get; set; }
+        public  DateTime DateOfBirth { get; set; }
 
 
     }

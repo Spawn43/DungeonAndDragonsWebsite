@@ -13,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ILoginTokenRepository, LoginTokenRepository>();
+builder.Services.AddTransient<IEventRepository, EventRepository>();
+builder.Services.AddTransient<ITableRepository, TableRepository>();
+
 
 var app = builder.Build();
 
