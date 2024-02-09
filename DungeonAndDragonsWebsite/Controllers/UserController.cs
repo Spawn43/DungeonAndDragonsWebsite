@@ -6,9 +6,7 @@ using DungeonAndDragonsWebsite.Repository;
 
 namespace DungeonAndDragonsWebsite.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    
+
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -25,7 +23,7 @@ namespace DungeonAndDragonsWebsite.Controllers
          }*/
 
         [HttpPost]
-        public void PostRegister([FromBody] User user)
+        public void PostRegister([FromBody] UserEntity user)
         {
             var returnCode = _userRepository.PostRegister(user);
             Console.WriteLine(returnCode);

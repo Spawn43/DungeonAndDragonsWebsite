@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DungeonAndDragonsWebsite.Models
-{
+namespace Data.Entities
+{ 
     public class LoginToken
     {
         [Key]

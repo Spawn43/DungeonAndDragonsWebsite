@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DungeonAndDragonsWebsite.Models
 {
-    public class Table
+    public class TableEntity
     {
         [Key]
         public string Id { get; set; }
         public Event Event { get; set; }
         public int PlayersAllowed { get; set; }
-        public ICollection<User> Players { get; set; }       
-        public User DungeonMaster { get; set; }
+        public ICollection<UserEntity> Players { get; set; }       
+        public UserEntity DungeonMaster { get; set; }
         
     }
 }

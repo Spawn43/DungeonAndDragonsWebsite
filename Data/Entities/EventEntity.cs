@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DungeonAndDragonsWebsite.Models
+namespace Data.Entities
 {
-    public class Event
+    public class EventEntity
     {
         [Key]
         public string Id { get; set; }

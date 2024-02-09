@@ -13,8 +13,8 @@ namespace DungeonAndDragonsWebsite.Repository
 
     public interface IUserRepository
     {
-        KeyValuePair<int, string> PostRegister(User user);
-        KeyValuePair<int, User> PostLogin(Login login);
+        KeyValuePair<int, string> PostRegister(UserEntity user);
+        KeyValuePair<int, UserEntity> PostLogin(Login login);
     }
     public class UserRepository : IUserRepository
     {
@@ -25,22 +25,22 @@ namespace DungeonAndDragonsWebsite.Repository
             _db = db;
         }
 
-        public KeyValuePair<int, User> PostLogin(Login login)
+        public KeyValuePair<int, UserEntity> PostLogin(Login login)
         {
-            User emptyUser = new User();
-            KeyValuePair<int, User> returnCode = new KeyValuePair<int, User>(409, emptyUser);
-            User databaseUser = GetUser(login.Username);
+            UserEntity emptyUser = new UserEntity();
+            KeyValuePair<int, UserEntity> returnCode = new KeyValuePair<int, UserEntity>(409, emptyUser);
+            UserEntity databaseUser = GetUser(login.Username);
             if (databaseUser != null)
             {
                 if (CheckPassword(login.Password, databaseUser))
                 {
-                    returnCode = new KeyValuePair<int, User>(200, databaseUser);
+                    returnCode = new KeyValuePair<int, UserEntity>(200, databaseUser);
                 }
             }           
             return returnCode;
         }
 
-        public KeyValuePair<int, string> PostRegister(User user)
+        public KeyValuePair<int, string> PostRegister(UserEntity user)
         {
             KeyValuePair <int, string> returnCode = new KeyValuePair<int, string>(200,"");
             if (CheckUserAge(user.DateOfBirth))
@@ -65,11 +65,11 @@ namespace DungeonAndDragonsWebsite.Repository
             return returnCode;
         }
 
-        private User GetUser(string  username)
+        private UserEntity GetUser(string  username)
         {
             return _db.Users.FirstOrDefault(u => u.Username == username);
         }
-        private bool CheckPassword(string password, User userDatabase)
+        private bool CheckPassword(string password, UserEntity userDatabase)
         {
      
                 string hashedPassword = HashPassword(password, userDatabase.PasswordSalt);
@@ -91,7 +91,7 @@ namespace DungeonAndDragonsWebsite.Repository
                 return hashedPassword;
             }
         }
-        private bool PostAddToDb(User user)
+        private bool PostAddToDb(UserEntity user)
         {
             var x = _db.Users.Add(user);
             _db.SaveChanges();
@@ -99,7 +99,7 @@ namespace DungeonAndDragonsWebsite.Repository
             return true;
         }
 
-        private User EncryptPassword(User user)
+        private UserEntity EncryptPassword(UserEntity user)
         {
             byte[] saltBytes = new byte[32]; // Adjust the size of the salt based on your security requirements
             using (var rng = new RNGCryptoServiceProvider())
@@ -138,7 +138,7 @@ namespace DungeonAndDragonsWebsite.Repository
 
         private bool CheckUserExists(string username, string email) {
 
-            List<User> dbUser = _db.Users
+            List<UserEntity> dbUser = _db.Users
                     .Where(u => u.Username.Equals(username) || u.Email.Equals(email))
                     .ToList();
 

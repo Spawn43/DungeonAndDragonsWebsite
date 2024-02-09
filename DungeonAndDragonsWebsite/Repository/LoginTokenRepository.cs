@@ -8,7 +8,7 @@ namespace DungeonAndDragonsWebsite.Repository
     public interface ILoginTokenRepository
     {
         public LoginToken IsLoggedIn(string loginToken);
-        public string LoginTokenGeneration(User user, int ttl);
+        public string LoginTokenGeneration(UserEntity user, int ttl);
     }
     public class LoginTokenRepository : ILoginTokenRepository
     {
@@ -20,7 +20,7 @@ namespace DungeonAndDragonsWebsite.Repository
             _db = db;
         }
 
-        public string LoginTokenGeneration(User user,int ttl)
+        public string LoginTokenGeneration(UserEntity user,int ttl)
         {
             string token = GenerateRandomToken();
             LoginToken lt = new LoginToken();

@@ -9,7 +9,7 @@ namespace DungeonAndDragonsWebsite.Repository
 {
     public interface IEventRepository
     {
-        public Event CreateEvent(EventCreation ec, User user);
+        public Event CreateEvent(EventCreation ec, UserEntity user);
         public Event GetEvent(string id);
     }
     public class EventRepository : IEventRepository
@@ -33,14 +33,14 @@ namespace DungeonAndDragonsWebsite.Repository
                 Name = e.Name,
                 Location = e.Location,
                 Date = e.Date,
-                Planner = new User { Id = e.Planner.Id, Username = e.Planner.Username },
-                Tables = e.Tables.Select(t => new Table
+                Planner = new UserEntity { Id = e.Planner.Id, Username = e.Planner.Username },
+                Tables = e.Tables.Select(t => new TableEntity
                 {
                     Id = t.Id,
                     Event = t.Event,
                     PlayersAllowed = t.PlayersAllowed,
-                    DungeonMaster = new User { Id =t.DungeonMaster.Id, Username = t.DungeonMaster.Username},
-                    Players = t.Players.Select(p => new User { Id = p.Id, Username = p.Username }).ToList()
+                    DungeonMaster = new UserEntity { Id =t.DungeonMaster.Id, Username = t.DungeonMaster.Username},
+                    Players = t.Players.Select(p => new UserEntity { Id = p.Id, Username = p.Username }).ToList()
 
                 }).ToList()
             })
@@ -49,7 +49,7 @@ namespace DungeonAndDragonsWebsite.Repository
 
         }
 
-        public Event CreateEvent(EventCreation ec, User user)
+        public Event CreateEvent(EventCreation ec, UserEntity user)
         {
             Event newEvent = new Event();
             newEvent.Id = GenerateRandomToken();
@@ -57,11 +57,11 @@ namespace DungeonAndDragonsWebsite.Repository
             newEvent.Name = ec.EventName;
             newEvent.Location = ec.Location;
             newEvent.Planner = user;
-            ICollection<Table> tables = new List<Table>();
+            ICollection<TableEntity> tables = new List<TableEntity>();
             int i = 0;
             while (i < ec.NumberOfTables)
             {
-                Table t = new Table();
+                TableEntity t = new TableEntity();
                 t.Id = GenerateRandomToken();
                 t.Event = newEvent;
                 tables.Add(t);

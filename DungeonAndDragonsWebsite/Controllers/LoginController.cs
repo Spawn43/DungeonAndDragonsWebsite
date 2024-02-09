@@ -20,7 +20,7 @@ namespace DungeonAndDragonsWebsite.Controllers
         [HttpPost]
         public IActionResult PostLogin([FromBody] Login login)
         {
-            KeyValuePair<int, User> returnCode = _userRepository.PostLogin(login);
+            KeyValuePair<int, UserEntity> returnCode = _userRepository.PostLogin(login);
 
             if (returnCode.Key == 200)
             {

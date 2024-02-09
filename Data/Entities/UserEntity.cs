@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DungeonAndDragonsWebsite.Models
+namespace Data.Entities
 {
-    public class User
+    public class UserEntity
     {
         [Key]
         public  string Id { get; set; }

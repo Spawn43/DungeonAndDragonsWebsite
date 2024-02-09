@@ -1,7 +1,7 @@
-﻿using DungeonAndDragonsWebsite.Models;
+﻿using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DungeonAndDragonsWebsite.Data
+namespace Data.Context
 {
     public class ApplicationDbContext :DbContext
     {
@@ -13,15 +13,15 @@ namespace DungeonAndDragonsWebsite.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Table>()
+            modelBuilder.Entity<TableEntity>()
                 .HasMany(t => t.Players)
                 .WithMany()
                 .UsingEntity(j => j.ToTable("TablePlayers"));
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Table> Tables { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<EventEntity> Events { get; set; }
+        public DbSet<TableEntity> Tables { get; set; }
         public DbSet<LoginToken> LoginTokens { get; set; }
 
     }

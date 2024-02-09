@@ -1,5 +1,6 @@
 using DungeonAndDragonsWebsite.Data;
 using DungeonAndDragonsWebsite.Repository;
+using DungeonAndDragonsWebsite.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,12 +11,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(DungeonAndDragonsWebsite.Mappers.AutoMapper));
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ILoginTokenRepository, LoginTokenRepository>();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddTransient<ITableRepository, TableRepository>();
+builder.Services.AddTransient<ITableService, TableService>();
 
 
 var app = builder.Build();

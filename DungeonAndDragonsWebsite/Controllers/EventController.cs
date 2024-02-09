@@ -25,7 +25,7 @@ namespace DungeonAndDragonsWebsite.Controllers
             if (lt != null)
             {
 
-                User user = lt.User;
+                UserEntity user = lt.User;
                 Event ev = _eventRepository.CreateEvent(ec, user);
             }
             Console.WriteLine("");
