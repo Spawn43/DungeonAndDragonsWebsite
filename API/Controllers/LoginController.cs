@@ -4,7 +4,7 @@ using Domain.Services.Interfaces;
 
 namespace API.Controllers
 {
-    [Route("api/Login")]
+    [Route("api/[controller]")]
     [ApiController]
     public class LoginController : Controller
     {
@@ -19,7 +19,7 @@ namespace API.Controllers
         public IActionResult PostLogin([FromBody] Login login)
         {
             KeyValuePair<int, string> returnCode = _service.Login(login);
-            return StatusCode(returnCode.Key, returnCode.Value);
+            return StatusCode(returnCode.Key, new { token = returnCode.Value });
 
         }
     }

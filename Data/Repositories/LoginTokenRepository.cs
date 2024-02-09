@@ -1,6 +1,7 @@
 ﻿using Data.Context;
 using Data.Entities;
 using Data.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -17,6 +18,15 @@ namespace Data.Repositories
         {
             _db.LoginTokens.Add(loginToken);
             _db.SaveChanges();
+        }
+
+        public LoginToken GetLoginTokenByToken(string loginToken)
+        {
+            return _db.LoginTokens
+                .Include(l => l.User)
+                .FirstOrDefault(u => loginToken == u.Token);
+                /*.Include(u => u.User)
+                .FirstOrDefault(u => loginToken == u.Token);*/
         }
     }
 }

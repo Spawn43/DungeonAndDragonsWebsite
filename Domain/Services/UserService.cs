@@ -21,7 +21,7 @@ namespace Domain.Services
         }
         /// Public Methods
 
-        public new KeyValuePair<int, string> RegisterUser(RegisterUser registerUser)
+        public KeyValuePair<int, string> RegisterUser(RegisterUser registerUser)
         {
             KeyValuePair<int, string> returnCode = new KeyValuePair<int, string>(400, "");
             if (CheckUserAge(registerUser.DateOfBirth))
@@ -43,7 +43,7 @@ namespace Domain.Services
                 userEntity.Id = userEntity.Username + DateTime.Now.ToString() + new Random().Next(1000, 9999).ToString();
                 userEntity = EncryptPassword(userEntity, registerUser.Password);
                 _repository.Insert(userEntity);
-                return new KeyValuePair<int, string>(409, "Existing Username or Email");
+                return new KeyValuePair<int, string>(200, "User Added");
 
             };
         }

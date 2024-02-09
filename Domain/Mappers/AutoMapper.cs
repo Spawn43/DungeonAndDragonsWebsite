@@ -9,8 +9,11 @@ namespace Domain.Mappers
     {
         public AutoMapper()
         {
-            CreateMap<LimitedUser, UserEntity>();
+            CreateMap<LimitedUser, UserEntity>().ReverseMap();
             CreateMap<RegisterUser, UserEntity>();
+            CreateMap<CreateEvent, EventEntity>().ReverseMap();
+            CreateMap<Event, EventEntity>().ReverseMap();
+            CreateMap<Table, TableEntity>().ReverseMap();
         }
     }
 }

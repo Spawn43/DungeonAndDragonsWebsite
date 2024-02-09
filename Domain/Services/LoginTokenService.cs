@@ -1,5 +1,7 @@
-﻿using Data.Entities;
+﻿using AutoMapper;
+using Data.Entities;
 using Data.Repositories.Interface;
+using Domain.Models;
 using Domain.Services.Interfaces;
 using System.Text;
 
@@ -11,7 +13,6 @@ namespace Domain.Services
         private static readonly Random RandomGenerator = new Random();
         private const string AlphanumericChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private static ILoginTokenRepository _repository;
-
         public LoginTokenService(ILoginTokenRepository loginTokenRepository)
         {
             _repository = loginTokenRepository;
@@ -31,6 +32,21 @@ namespace Domain.Services
             return token;
 
 
+        }
+
+        public UserEntity CheckToken(string token)
+        {
+            LoginToken lt = _repository.GetLoginTokenByToken(token);
+            if (lt!=null)
+            {
+               
+                return lt.User;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         private string GenerateRandomId()
