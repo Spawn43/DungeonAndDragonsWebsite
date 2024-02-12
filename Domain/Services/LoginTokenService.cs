@@ -37,9 +37,8 @@ namespace Domain.Services
         public UserEntity CheckToken(string token)
         {
             LoginTokenEntity lt = _repository.GetLoginTokenByToken(token);
-            if (lt!=null)
-            {
-               
+            if (lt!=null && DateTime.Now<=(lt.LoginDateTime.AddHours(lt.TTL)))
+            {              
                 return lt.User;
             }
             else

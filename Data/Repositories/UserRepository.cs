@@ -13,6 +13,12 @@ namespace Data.Repositories
         {
             _db = db;
         }
+        public UserEntity GetUserById(string id) 
+        {
+            UserEntity user = _db.Users
+            .FirstOrDefault(u => u.Id.Equals(id));
+            return user;
+        }
         public UserEntity GetUserByUsername(string username)
         {
             UserEntity user = _db.Users

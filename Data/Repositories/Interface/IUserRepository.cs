@@ -6,6 +6,7 @@ namespace Data.Repositories.Interface
     {
         UserEntity GetUserByUsername(string username);
         UserEntity GetUserByEmail(string email);
+        UserEntity GetUserById(string id);
         bool Insert(UserEntity user);
     }
 }

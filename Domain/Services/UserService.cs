@@ -68,7 +68,7 @@ namespace Domain.Services
 
         private bool CheckUserExists(string username, string email)
         {
-            if (_repository.GetUserByUsername(username) == null || _repository.GetUserByEmail(email) == null)
+            if (_repository.GetUserByUsername(username) == null && _repository.GetUserByEmail(email) == null)
             {
                 return false;
             }

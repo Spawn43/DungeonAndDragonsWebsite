@@ -4,9 +4,10 @@ namespace Domain.Services.Interfaces
 {
     public interface ITableService
     {
-        void AddPlayer(LoginToken token, string tableId);
+        public KeyValuePair<int, string> AddPlayer(LoginToken token, string tableId);
         public Table GetTable(string id);
-        public bool ClaimTable(LoginToken token, string tableId);
-        public bool SetPlayersAllowed(PlayersNoTable pnt, string tableId);
+        public KeyValuePair<int, string> ClaimTable(LoginToken token, string tableId);
+        public KeyValuePair<int, string> SetPlayersAllowed(PlayersNoTable pnt, string tableId);
+        public KeyValuePair<int, string> RemovePlayer(LoginToken lt, string tableId, string userId);
     }
 }

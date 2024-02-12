@@ -31,28 +31,29 @@ namespace API.Controllers
         [HttpPut("{id}/DungeonMaster")]
         public IActionResult ClaimTable(string id, [FromBody] LoginToken lt)
         {
-            if (_tableService.ClaimTable(lt, id))
-            {
-                return Ok();
-            }
-            return BadRequest();
+            KeyValuePair<int, string> statusCode = _tableService.ClaimTable(lt, id);
+            return StatusCode(statusCode.Key, new { message = statusCode.Value });
         }
 
         [HttpPut("{id}/PlayersAllowed")]
         public IActionResult PlayersAllowed(string id, [FromBody] PlayersNoTable pnt)
         {
-            if (_tableService.SetPlayersAllowed(pnt, id))
-            {
-                return Ok();
-            }
-            return BadRequest();
+            KeyValuePair<int, string> statusCode = _tableService.SetPlayersAllowed(pnt, id);
+            return StatusCode(statusCode.Key, new { message = statusCode.Value });
         }
 
         [HttpPut("{id}/Players")]
         public IActionResult AddPlayer(string id, [FromBody] LoginToken token)
         {
-            _tableService.AddPlayer(token, id);
-            return Ok();
+            KeyValuePair<int,string> statusCode = _tableService.AddPlayer(token, id);
+            return StatusCode(statusCode.Key, new { message = statusCode.Value });
+        }
+
+        [HttpDelete("{id}/Players/{userId}")]
+        public IActionResult DeletePlayer(string id, string userId, [FromBody] LoginToken token) 
+        {
+            KeyValuePair<int, string> statusCode = _tableService.RemovePlayer(token, id, userId);
+            return StatusCode(statusCode.Key, new { message = statusCode.Value });
         }
     }
 }
