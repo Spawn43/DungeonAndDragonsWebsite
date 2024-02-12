@@ -23,6 +23,8 @@ builder.Services.AddTransient<ILoginTokenService, LoginTokenService>();
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddTransient<IEventService, EventService>();
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<ITableService, TableService>();
 
 
 //builder.Services.AddTransient<ILoginTokenRepository, LoginTokenRepository>();

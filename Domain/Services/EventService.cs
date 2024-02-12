@@ -3,6 +3,7 @@ using Data.Entities;
 using Data.Repositories.Interface;
 using Domain.Models;
 using Domain.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Text;
 
 namespace Domain.Services
@@ -62,8 +63,6 @@ namespace Domain.Services
             }
             return "error";
         }
-
-
 
 
 

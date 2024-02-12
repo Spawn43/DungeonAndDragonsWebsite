@@ -4,7 +4,7 @@ namespace Data.Repositories.Interface
 {
     public interface ILoginTokenRepository
     {
-        void InsertLoginToken(LoginToken loginToken);
-        public LoginToken GetLoginTokenByToken(string loginToken);
+        void InsertLoginToken(LoginTokenEntity loginToken);
+        public LoginTokenEntity GetLoginTokenByToken(string loginToken);
     }
 }

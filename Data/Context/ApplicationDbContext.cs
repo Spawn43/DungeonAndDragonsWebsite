@@ -22,7 +22,7 @@ namespace Data.Context
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<EventEntity> Events { get; set; }
         public DbSet<TableEntity> Tables { get; set; }
-        public DbSet<LoginToken> LoginTokens { get; set; }
+        public DbSet<LoginTokenEntity> LoginTokens { get; set; }
 
     }
 }

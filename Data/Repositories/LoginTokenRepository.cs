@@ -14,13 +14,13 @@ namespace Data.Repositories
             _db = db;
         }
 
-        public void InsertLoginToken(LoginToken loginToken)
+        public void InsertLoginToken(LoginTokenEntity loginToken)
         {
             _db.LoginTokens.Add(loginToken);
             _db.SaveChanges();
         }
 
-        public LoginToken GetLoginTokenByToken(string loginToken)
+        public LoginTokenEntity GetLoginTokenByToken(string loginToken)
         {
             return _db.LoginTokens
                 .Include(l => l.User)

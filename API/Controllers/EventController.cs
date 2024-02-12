@@ -42,5 +42,7 @@ namespace API.Controllers
                 return StatusCode(200, new { EventId = eventId});
             }
         }
+
+        
     }
 }

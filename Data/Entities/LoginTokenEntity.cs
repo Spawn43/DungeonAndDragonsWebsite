@@ -2,7 +2,7 @@
 
 namespace Data.Entities
 { 
-    public class LoginToken
+    public class LoginTokenEntity
     {
         [Key]
         public string Id { get; set; }

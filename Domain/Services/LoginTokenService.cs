@@ -20,7 +20,7 @@ namespace Domain.Services
         public string LoginTokenGeneration(UserEntity user, int ttl)
         {
             string token = GenerateRandomToken();
-            LoginToken lt = new LoginToken();
+            LoginTokenEntity lt = new LoginTokenEntity();
             lt.Id = GenerateRandomId();
             lt.LoginDateTime = DateTime.Now;
             lt.User = user;
@@ -36,7 +36,7 @@ namespace Domain.Services
 
         public UserEntity CheckToken(string token)
         {
-            LoginToken lt = _repository.GetLoginTokenByToken(token);
+            LoginTokenEntity lt = _repository.GetLoginTokenByToken(token);
             if (lt!=null)
             {
                
